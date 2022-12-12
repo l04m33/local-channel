@@ -74,20 +74,27 @@ of programming tools as well as libraries with equivalent functionality.")
                      (recursive? #t)))
               (sha256
                (base32
-                "0829wymcwph71zlwql6v7i7j9gr1m96acyp2xsr69vq2h98wmlap"))))
+                "0829wymcwph71zlwql6v7i7j9gr1m96acyp2xsr69vq2h98wmlap"))
+              (patches
+               (parameterize
+                   ((%patch-path
+                     (map (lambda (directory)
+                            (string-append directory "/guix-local-packages/patches/"))
+                          %load-path)))
+                 (search-patches "fix_dyn_linker_locator.patch")))))
     (build-system cmake-build-system)
     (arguments '(#:configure-flags '()
                  #:build-type "Release"
                  #:tests? #f
                  #:phases (modify-phases %standard-phases
-                            (add-before 'build 'fix-zig-cache-dir
+                            (add-before ':configure 'fix-zig-cache-dir
                               (lambda _
                                 (let ((cache-dir (string-append (getenv "TMPDIR") "/cache")))
                                   (mkdir cache-dir)
                                   (setenv "XDG_CACHE_HOME" cache-dir))
                                 #t)))))
-    (propagated-inputs `(("llvm-for-zig" ,llvm-for-zig)
-                         ("zlib" ,zlib)))
+    (inputs `(("llvm-for-zig" ,llvm-for-zig)
+              ("zlib" ,zlib)))
     (synopsis
      "A general-purpose programming language and toolchain.")
     (description
