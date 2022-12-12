@@ -87,7 +87,7 @@ of programming tools as well as libraries with equivalent functionality.")
                  #:build-type "Release"
                  #:tests? #f
                  #:phases (modify-phases %standard-phases
-                            (add-before ':configure 'fix-zig-cache-dir
+                            (add-before 'configure 'fix-zig-cache-dir
                               (lambda _
                                 (let ((cache-dir (string-append (getenv "TMPDIR") "/cache")))
                                   (mkdir cache-dir)
