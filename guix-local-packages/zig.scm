@@ -72,16 +72,12 @@ of programming tools as well as libraries with equivalent functionality.")
                      (url "https://github.com/ziglang/zig.git")
                      (commit "d10fd78d4")
                      (recursive? #t)))
+              (file-name (git-file-name "zig" version))
               (sha256
                (base32
                 "0829wymcwph71zlwql6v7i7j9gr1m96acyp2xsr69vq2h98wmlap"))
               (patches
-               (parameterize
-                   ((%patch-path
-                     (map (lambda (directory)
-                            (string-append directory "/guix-local-packages/patches/"))
-                          %load-path)))
-                 (search-patches "fix_dyn_linker_locator.patch")))))
+               (search-patches "zig_fix_dyn_linker_locator.patch"))))
     (build-system cmake-build-system)
     (arguments '(#:configure-flags '()
                  #:build-type "Release"
