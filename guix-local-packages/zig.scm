@@ -79,7 +79,8 @@ of programming tools as well as libraries with equivalent functionality.")
               (patches
                (search-patches "zig_fix_dyn_linker_locator.patch"))))
     (build-system cmake-build-system)
-    (arguments '(#:configure-flags '()
+    (arguments '(#:validate-runpath? #f
+                 #:configure-flags '()
                  #:build-type "Release"
                  #:tests? #f
                  #:phases (modify-phases %standard-phases
