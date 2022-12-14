@@ -75,7 +75,7 @@ of programming tools as well as libraries with equivalent functionality.")
               (file-name (git-file-name "zig" version))
               (sha256
                (base32
-                "2829wymcwph71zlwql6v7i7j9gr1m96acyp2xsr69vq2h98wmlap"))
+                "140dksdhas836rsw20sskv6ik52fk6w5rkq8bx4r9f3xz5d0bybf"))
               (patches
                (search-patches "zig_fix_dyn_linker_locator.patch"))))
     (build-system cmake-build-system)
@@ -113,7 +113,7 @@ maintaining robust, optimal, and reusable software.")
                      (recursive? #t)))
               (sha256
                (base32
-                "0p4mvy03drccwvj012rmlrfzj1c3495vdgdniqsnkalsf9ibv0q8"))))
+                "18rkqrdsjs41f7147v5hgvid4w53901lgfv7yapg6dv6m1m9hl24"))))
     (build-system trivial-build-system)
     (arguments `(#:modules ((guix build utils))
                  #:builder
