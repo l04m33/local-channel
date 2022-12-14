@@ -65,17 +65,17 @@ of programming tools as well as libraries with equivalent functionality.")
 (define zig
   (package
     (name "zig")
-    (version "0.11.x-20221210-d10fd78d4")
+    (version "0.11.x-20221214-014009a73")
     (source (origin
               (method git-fetch)
               (uri (git-reference
                      (url "https://github.com/ziglang/zig.git")
-                     (commit "d10fd78d4")
+                     (commit "014009a73")
                      (recursive? #t)))
               (file-name (git-file-name "zig" version))
               (sha256
                (base32
-                "0829wymcwph71zlwql6v7i7j9gr1m96acyp2xsr69vq2h98wmlap"))
+                "2829wymcwph71zlwql6v7i7j9gr1m96acyp2xsr69vq2h98wmlap"))
               (patches
                (search-patches "zig_fix_dyn_linker_locator.patch"))))
     (build-system cmake-build-system)
@@ -104,16 +104,16 @@ maintaining robust, optimal, and reusable software.")
 (define zls
   (package
     (name "zls")
-    (version "0.11.x-20221214-5dca821")
+    (version "0.11.x-20221214-d43329a9e")
     (source (origin
               (method git-fetch)
               (uri (git-reference
                      (url "https://github.com/zigtools/zls.git")
-                     (commit "5dca821")
+                     (commit "d43329a9e")
                      (recursive? #t)))
               (sha256
                (base32
-                "1p4mvy03drccwvj012rmlrfzj1c3495vdgdniqsnkalsf9ibv0q8"))))
+                "0p4mvy03drccwvj012rmlrfzj1c3495vdgdniqsnkalsf9ibv0q8"))))
     (build-system trivial-build-system)
     (arguments `(#:modules ((guix build utils))
                  #:builder
