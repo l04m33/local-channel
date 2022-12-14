@@ -1,13 +1,48 @@
 diff --git a/lib/std/zig/system/NativeTargetInfo.zig b/lib/std/zig/system/NativeTargetInfo.zig
-index 023279738..a19816a22 100644
+index 023279738..cc5855860 100644
 --- a/lib/std/zig/system/NativeTargetInfo.zig
 +++ b/lib/std/zig/system/NativeTargetInfo.zig
-@@ -311,7 +311,7 @@ fn detectAbiAndDynamicLinker(
+@@ -232,6 +232,34 @@ pub fn detect(cross_target: CrossTarget) DetectError!NativeTargetInfo {
+     return result;
+ }
+ 
++fn findRefBinaryPath(name: []const u8) ?[]u8 {
++    const path = std.os.getenv("PATH");
++    var buff: [4096]u8 = undefined;
++
++    if (path) |p| {
++        var st: usize = 0;
++        for (p) |c, ed| {
++            if (c == ':') {
++                const dir = p[st..ed];
++                st = ed + 1;
++
++                std.mem.copy(u8, buff[0..], dir);
++                buff[dir.len] = '/';
++                std.mem.copy(u8, buff[(dir.len+1)..], name);
++                const candidate = buff[0..(dir.len+name.len+1)];
++
++                const file = std.fs.openFileAbsolute(candidate, .{}) catch {
++                    continue;
++                };
++                file.close();
++                return candidate;
++            }
++        }
++    }
++
++    return null;
++}
++
+ /// In the past, this function attempted to use the executable's own binary if it was dynamically
+ /// linked to answer both the C ABI question and the dynamic linker question. However, this
+ /// could be problematic on a system that uses a RUNPATH for the compiler binary, locking
+@@ -311,7 +339,7 @@ fn detectAbiAndDynamicLinker(
  
          // Since /usr/bin/env is hard-coded into the shebang line of many portable scripts, it's a
          // reasonably reliable path to start with.
 -        var file_name: []const u8 = "/usr/bin/env";
-+        var file_name: []const u8 = "/bin/sh";
++        var file_name: []const u8 = findRefBinaryPath("env") orelse "/usr/bin/env";
          // #! (2) + 255 (max length of shebang line since Linux 5.1) + \n (1)
          var buffer: [258]u8 = undefined;
          while (true) {
