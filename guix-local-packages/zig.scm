@@ -11,6 +11,7 @@
   #:use-module (gnu packages perl)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages libffi)
+  #:use-module (ice-9 match)
   #:export (zig
             llvm-for-zig
             zls))
