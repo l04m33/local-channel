@@ -104,16 +104,16 @@ maintaining robust, optimal, and reusable software.")
 (define zls
   (package
     (name "zls")
-    (version "20221208-9e658cdbb")
+    (version "0.11.x-20221214-5dca821")
     (source (origin
               (method git-fetch)
               (uri (git-reference
                      (url "https://github.com/zigtools/zls.git")
-                     (commit "9e658cdbb")
+                     (commit "5dca821")
                      (recursive? #t)))
               (sha256
                (base32
-                "979mk1ii6nzwlzcjv9vwxla4gpiqkjljvwd31qcn9y14sbvajbqy"))))
+                "079mk1ii6nzwlzcjv9vwxla4gpiqkjljvwd31qcn9y14sbvajbqy"))))
     (build-system trivial-build-system)
     (arguments `(#:modules ((guix build utils))
                  #:builder
@@ -123,13 +123,17 @@ maintaining robust, optimal, and reusable software.")
                           (outdir (assoc-ref %outputs "out"))
                           (tmpdir (getenv "TMPDIR"))
                           (build-srcdir (string-append tmpdir "/source"))
-                          (bin-outdir (string-append outdir "/bin"))
-                          (zig-out (assoc-ref %build-inputs "zig")))
+                          (bin-outdir (string-append outdir "/bin")))
                      (copy-recursively srcdir build-srcdir)
                      (chdir build-srcdir)
                      ;; The global zig-cache needs this to be set.
-                     (setenv "XDG_CACHE_HOME" tmpdir)
-                     (set-path-environment-variable "PATH" '("bin") `(,zig-out))
+                     (let ((cache-dir (string-append tmpdir "/cache")))
+                       (mkdir cache-dir)
+                       (setenv "XDG_CACHE_HOME" cache-dir))
+                     (set-path-environment-variable
+                       "PATH"
+                       '("bin")
+                       (map (match-lambda ((_ . input) input)) %build-inputs))
                      (invoke "zig"
                              "build"
                              "-Drelease-safe")
