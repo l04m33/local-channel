@@ -11,7 +11,6 @@
   #:use-module (gnu packages perl)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages libffi)
-  #:use-module (ice-9 match)
   #:export (zig
             llvm-for-zig
             zls))
@@ -119,7 +118,8 @@ maintaining robust, optimal, and reusable software.")
     (arguments `(#:modules ((guix build utils))
                  #:builder
                  (begin
-                   (use-modules (guix build utils))
+                   (use-modules (guix build utils)
+                                (ice-9 match))
                    (let* ((srcdir (assoc-ref %build-inputs "source"))
                           (outdir (assoc-ref %outputs "out"))
                           (tmpdir (getenv "TMPDIR"))
