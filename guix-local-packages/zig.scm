@@ -132,6 +132,7 @@ maintaining robust, optimal, and reusable software.")
                      (let ((cache-dir (string-append tmpdir "/cache")))
                        (mkdir cache-dir)
                        (setenv "XDG_CACHE_HOME" cache-dir))
+                     ;; So that the build process can find `zig` & `env`
                      (set-path-environment-variable
                        "PATH"
                        '("bin")
@@ -141,6 +142,7 @@ maintaining robust, optimal, and reusable software.")
                              "-Drelease-safe")
                      (install-file (string-append build-srcdir "/zig-out/bin/zls") bin-outdir)
                      #t))))
+    ;; The `zig build` command needs at least the `env` command
     (inputs `(("coreutils" ,coreutils)))
     (propagated-inputs `(("zig" ,zig)))
     (synopsis "The Zig Language Server")
