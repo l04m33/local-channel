@@ -104,16 +104,16 @@ maintaining robust, optimal, and reusable software.")
 (define zls
   (package
     (name "zls")
-    (version "0.11.x-20221214-d43329a9e")
+    (version "0.11.x-20221214-3526f5f")
     (source (origin
               (method git-fetch)
               (uri (git-reference
                      (url "https://github.com/zigtools/zls.git")
-                     (commit "d43329a9e")
+                     (commit "3526f5f")
                      (recursive? #t)))
               (sha256
                (base32
-                "18rkqrdsjs41f7147v5hgvid4w53901lgfv7yapg6dv6m1m9hl24"))))
+                "08rkqrdsjs41f7147v5hgvid4w53901lgfv7yapg6dv6m1m9hl24"))))
     (build-system trivial-build-system)
     (arguments `(#:modules ((guix build utils))
                  #:builder
