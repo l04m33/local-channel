@@ -105,7 +105,7 @@ maintaining robust, optimal, and reusable software.")
 (define zls
   (package
     (name "zls")
-    (version "0.11.x-20221214-3526f5f")
+    (version "0.11.x-20221215-3526f5f")
     (source (origin
               (method git-fetch)
               (uri (git-reference
