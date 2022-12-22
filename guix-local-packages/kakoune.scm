@@ -22,7 +22,7 @@
              (commit (string-append "v" version))))
        (file-name (git-file-name "kakoune" version))
        (sha256
-        (base32 "1x5mvmpf0rgmr2xdw5wjn4hr6qd8yvj0zx588fi324x1knfqhc5a"))))
+        (base32 "0ycxhmb9dzckzlpy4yr5c1719wy6syhb7zr0g7n2habld5lccv5y"))))
     (build-system gnu-build-system)
     (arguments
      `(#:make-flags
