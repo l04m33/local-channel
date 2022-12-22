@@ -28,7 +28,11 @@
      `(#:make-flags
        (list (string-append "PREFIX=" (assoc-ref %outputs "out")))
        #:phases
-       (modify-phases %standard-phases (delete 'configure))))
+       (modify-phases %standard-phases
+                      (delete 'configure)
+                      (add-before 'check 'fix-shell-location
+                                  (lambda _
+                                    (setenv "KAKOUNE_POSIX_SHELL" (which "sh")))))))
     (native-inputs (list pkg-config))
     (native-search-paths (list (search-path-specification
                                 (variable "KAKOUNE_POSIX_SHELL")
