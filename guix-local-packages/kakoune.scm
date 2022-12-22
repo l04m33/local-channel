@@ -3,7 +3,7 @@
   #:use-module (guix download)
   #:use-module (guix git-download)
   #:use-module (guix gexp)
-  #:use-module (guix build-system gnu-build-system)
+  #:use-module (guix build-system gnu)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
   #:export (kakoune))
