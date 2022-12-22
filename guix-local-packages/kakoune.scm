@@ -6,6 +6,7 @@
   #:use-module (guix build-system gnu)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
+  #:use-module (gnu packages pkg-config)
   #:export (kakoune))
 
 
