@@ -34,9 +34,6 @@
                                   (lambda _
                                     (setenv "KAKOUNE_POSIX_SHELL" (which "sh")))))))
     (native-inputs (list pkg-config))
-    (native-search-paths (list (search-path-specification
-                                (variable "KAKOUNE_POSIX_SHELL")
-                                (files (list "bin/sh")))))
     (synopsis "Vim-inspired code editor")
     (description
      "Kakoune is a code editor heavily inspired by Vim, as such most of its
