@@ -27,12 +27,7 @@
               "0xr1i2yv85whb4c9484sgvnsx3mx4zvwkliljx55qvi8ss2q0xja"))))
    (build-system cmake-build-system)
    (arguments '(#:configure-flags '("-DBUILD_PRO=On")
-                #:build-type "Release"
-                #:phases (modify-phases %standard-phases
-                           (add-before 'configure 'change-to-build-dir
-                             (lambda _
-                               (chdir (assoc-ref %build-inputs "source"))
-                               (chdir "build"))))))
+                #:build-type "Release"))
    (inputs (list ruby
                  mesa
                  libglvnd
