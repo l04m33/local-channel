@@ -24,7 +24,7 @@
             (file-name (git-file-name "tic-80" version))
             (sha256
              (base32
-              ""))))
+              "2naqjig94ykl1hnpia98agx91hxd3nayyfdkhvg1ggpfpgfx8145"))))
    (build-system cmake-build-system)
    (arguments '(#:configure-flags '("-DBUILD_PRO=On")
                 #:build-type "Release"
@@ -41,4 +41,3 @@
    (description "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
    (home-page "https://tic80.com/")
    (license license:expat))) ;; MIT
-            
