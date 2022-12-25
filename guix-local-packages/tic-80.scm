@@ -31,8 +31,8 @@
                 #:phases (modify-phases %standard-phases
                            (add-before 'configure 'change-to-build-dir
                              (lambda _
-                               (cd (assoc-ref %build-inputs "source"))
-                               (cd "build"))))))
+                               (chdir (assoc-ref %build-inputs "source"))
+                               (chdir "build"))))))
    (inputs (list ruby
                  mesa
                  libglvnd
