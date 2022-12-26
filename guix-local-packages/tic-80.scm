@@ -8,7 +8,7 @@
   #:use-module (gnu packages)
   #:use-module (gnu packages linux)
   #:use-module (gnu packages pkg-config)
-  #:use-module (gnu packages git)
+  #:use-module (gnu packages version-control)
   #:use-module (gnu packages ruby)
   #:use-module (gnu packages gl)
   #:export (tic-80))  
