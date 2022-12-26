@@ -3,17 +3,14 @@
   #:use-module (guix download)
   #:use-module (guix git-download)
   #:use-module (guix gexp)
-  #:use-module (guix build-system trivial)
+  #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
   #:use-module (gnu packages linux)
-  #:use-module (gnu packages base)
-  #:use-module (gnu packages commencement)
   #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages version-control)
   #:use-module (gnu packages ruby)
   #:use-module (gnu packages gl)
-  #:use-module (gnu packages cmake)
   #:export (tic-80))  
 
 
@@ -31,51 +28,33 @@
             (sha256
              (base32
               "0xr1i2yv85whb4c9484sgvnsx3mx4zvwkliljx55qvi8ss2q0xja"))))
-   (build-system trivial-build-system)
-   (arguments `(#:modules ((guix build utils))
-                #:builder
-                (begin
-                  (use-modules (guix build utils)
-                               (ice-9 match))
-                  (let* ((srcdir (assoc-ref %build-inputs "source"))
-                         (outdir (assoc-ref %outputs "out"))
-                         (tmpdir (getenv "TMPDIR"))
-                         (build-srcdir (string-append tmpdir "/source"))
-                         (build-dir (string-append build-srcdir "/build"))
-                         (bin-outdir (string-append outdir "/bin")))
-                    (copy-recursively srcdir build-srcdir)
-                    (chdir build-dir)
-                    (set-path-environment-variable
-                      "PATH"
-                      '("bin")
-                      (map (match-lambda ((_ . input) input)) %build-inputs))
-                    (invoke "cmake"
-                            ".."
-                            "-DCMAKE_BUILD_TYPE=Release"
-                            (string-append "-DCMAKE_INSTALL_PREFIX=" outdir)
-                            "-DCMAKE_INSTALL_LIBDIR=lib"
-                            "-DCMAKE_INSTALL_RPATH_USE_LINK_PATH=TRUE"
-                            (string-append "-DCMAKE_INSTALL_RPATH=" outdir "/lib")
-                            "-DCMAKE_VERBOSE_MAKEFILE=ON"
-                            "-DBUILD_PRO=On")
-                    (invoke "make" "-j8")
-                    (install-file (string-append build-dir "/bin/tic80") bin-outdir)
-                    #t))))
-   (inputs `(("coreutils" ,coreutils)
-             ("binutils" ,binutils)
-             ("gcc-toolchain" ,gcc-toolchain)
-             ("glibc" ,glibc)
-             ("glibc:static" ,glibc "static")
-             ("ld-wrapper" ,ld-wrapper)
-             ("cmake" ,cmake)
-             ("gnu-make" ,gnu-make)
-             ("git" ,git)
-             ("ruby" ,ruby)
-             ("glu" ,glu)
-             ("mesa" ,mesa)
-             ("libglvnd" ,libglvnd)
-             ("freeglut" ,freeglut)
-             ("alsa-lib" ,alsa-lib)))
+   (build-system cmake-build-system)
+   (arguments `(#:tests? #f
+                #:phases (modify-phases %standard-phases
+                           (replace 'configure
+                             (lambda _
+                               (let* ((tmpdir (getenv "TMPDIR"))
+                                      (build-srcdir (string-append tmpdir "/source"))
+                                      (build-dir (string-append build-srcdir "/build"))
+                                      (outdir (assoc-ref %outputs "out")))
+                                 (chdir build-dir)
+                                 (invoke "cmake"
+                                         ".."
+                                         "-DCMAKE_BUILD_TYPE=Release"
+                                         (string-append "-DCMAKE_INSTALL_PREFIX=" outdir)
+                                         "-DCMAKE_INSTALL_LIBDIR=lib"
+                                         "-DCMAKE_INSTALL_RPATH_USE_LINK_PATH=TRUE"
+                                         (string-append "-DCMAKE_INSTALL_RPATH=" outdir "/lib")
+                                         "-DCMAKE_VERBOSE_MAKEFILE=ON"
+                                         "-DBUILD_PRO=On")))))))
+   (inputs (list pkg-config
+                 git
+                 ruby
+                 glu
+                 mesa
+                 libglvnd
+                 freeglut
+                 alsa-lib))
    (synopsis "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
    (description "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
    (home-page "https://tic80.com/")
