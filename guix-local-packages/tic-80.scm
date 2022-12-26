@@ -8,10 +8,8 @@
   #:use-module (gnu packages)
   #:use-module (gnu packages linux)
   #:use-module (gnu packages pkg-config)
+  #:use-module (gnu packages git)
   #:use-module (gnu packages ruby)
-  #:use-module (gnu packages lua)
-  #:use-module (gnu packages python)
-  #:use-module (gnu packages perl)
   #:use-module (gnu packages gl)
   #:export (tic-80))  
 
@@ -36,16 +34,16 @@
                 #:tests? #f
                 #:phases (modify-phases %standard-phases
                            (delete 'set-SOURCE-DATE-EPOCH)
-                           (delete 'strip))))
+                           (delete 'strip)
+                           (delete 'reset-gzip-timestamps))))
    (inputs (list pkg-config
+                 git
                  ruby
-                 lua
-                 python
-                 perl
+                 glu
                  mesa
                  libglvnd
                  freeglut
-                 pipewire))
+                 alsa-lib))
    (synopsis "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
    (description "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
    (home-page "https://tic80.com/")
