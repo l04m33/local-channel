@@ -6,6 +6,8 @@
   #:use-module (guix build-system cmake)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
+  #:use-module (gnu packages linux)
+  #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages ruby)
   #:use-module (gnu packages gl)
   #:export (tic-80))  
@@ -27,11 +29,14 @@
               "0xr1i2yv85whb4c9484sgvnsx3mx4zvwkliljx55qvi8ss2q0xja"))))
    (build-system cmake-build-system)
    (arguments '(#:configure-flags '("-DBUILD_PRO=On")
+                #:build-type "Release"
                 #:tests? #f))
-   (inputs (list ruby
+   (inputs (list pkg-config
+                 ruby
                  mesa
                  libglvnd
-                 freeglut))
+                 freeglut
+                 pipewire))
    (synopsis "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
    (description "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
    (home-page "https://tic80.com/")
