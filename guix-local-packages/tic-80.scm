@@ -34,7 +34,15 @@
                 #:tests? #f
                 #:phases (modify-phases %standard-phases
                            (delete 'set-SOURCE-DATE-EPOCH)
+                           (delete 'install-locale)
+                           (delete 'bootstrap)
+                           (delete 'patch-usr-bin-file)
+                           (delete 'patch-source-shebangs)
+                           (delete 'patch-generated-file-shebangs)
+                           (delete 'patch-shebangs)
                            (delete 'strip)
+                           (delete 'patch-dot-desktop-files)
+                           (delete 'make-dynamic-linker-cache)
                            (delete 'reset-gzip-timestamps))))
    (inputs (list pkg-config
                  git
