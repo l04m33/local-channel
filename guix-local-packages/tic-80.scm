@@ -9,6 +9,9 @@
   #:use-module (gnu packages linux)
   #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages ruby)
+  #:use-module (gnu packages lua)
+  #:use-module (gnu packages python)
+  #:use-module (gnu packages perl)
   #:use-module (gnu packages gl)
   #:export (tic-80))  
 
@@ -33,6 +36,9 @@
                 #:tests? #f))
    (inputs (list pkg-config
                  ruby
+                 lua
+                 python
+                 perl
                  mesa
                  libglvnd
                  freeglut
