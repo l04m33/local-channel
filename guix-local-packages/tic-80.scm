@@ -7,6 +7,8 @@
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
   #:use-module (gnu packages linux)
+  #:use-module (gnu packages base)
+  #:use-module (gnu packages commencement)
   #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages version-control)
   #:use-module (gnu packages ruby)
@@ -59,7 +61,10 @@
                     (invoke "make" "-j8")
                     (install-file (string-append build-dir "/bin/tic80") bin-outdir)
                     #t))))
-   (inputs (list cmake
+   (inputs (list coreutils
+                 gcc-toolchain
+                 glibc
+                 cmake
                  ruby
                  glu
                  mesa
