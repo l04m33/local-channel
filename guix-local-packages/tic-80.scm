@@ -67,6 +67,7 @@
                  glibc
                  cmake
                  gnu-make
+                 git
                  ruby
                  glu
                  mesa
