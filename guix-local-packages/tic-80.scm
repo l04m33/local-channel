@@ -62,9 +62,11 @@
                     (install-file (string-append build-dir "/bin/tic80") bin-outdir)
                     #t))))
    (inputs (list coreutils
+                 binutils
                  gcc-toolchain
                  glibc
                  cmake
+                 gnu-make
                  ruby
                  glu
                  mesa
