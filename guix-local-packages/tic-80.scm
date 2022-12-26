@@ -33,7 +33,10 @@
    (build-system cmake-build-system)
    (arguments '(#:configure-flags '("-DBUILD_PRO=On")
                 #:build-type "Release"
-                #:tests? #f))
+                #:tests? #f
+                #:phases (modify-phases %standard-phases
+                           (delete 'set-SOURCE-DATE-EPOCH)
+                           (delete 'strip))))
    (inputs (list pkg-config
                  ruby
                  lua
