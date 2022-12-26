@@ -61,19 +61,21 @@
                     (invoke "make" "-j8")
                     (install-file (string-append build-dir "/bin/tic80") bin-outdir)
                     #t))))
-   (inputs (list coreutils
-                 binutils
-                 gcc-toolchain
-                 glibc
-                 cmake
-                 gnu-make
-                 git
-                 ruby
-                 glu
-                 mesa
-                 libglvnd
-                 freeglut
-                 alsa-lib))
+   (inputs `(("coreutils" ,coreutils)
+             ("binutils" ,binutils)
+             ("gcc-toolchain" ,gcc-toolchain)
+             ("glibc" ,glibc)
+             ("glibc:static" ,glibc "static")
+             ("ld-wrapper" ,ld-wrapper)
+             ("cmake" ,cmake)
+             ("gnu-make" ,gnu-make)
+             ("git" ,git)
+             ("ruby" ,ruby)
+             ("glu" ,glu)
+             ("mesa" ,mesa)
+             ("libglvnd" ,libglvnd)
+             ("freeglut" ,freeglut)
+             ("alsa-lib" ,alsa-lib)))
    (synopsis "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
    (description "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
    (home-page "https://tic80.com/")
