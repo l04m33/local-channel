@@ -11,6 +11,7 @@
   #:use-module (gnu packages version-control)
   #:use-module (gnu packages ruby)
   #:use-module (gnu packages gl)
+  #:use-module (gnu packages cmake)
   #:export (tic-80))  
 
 
@@ -28,24 +29,37 @@
             (sha256
              (base32
               "0xr1i2yv85whb4c9484sgvnsx3mx4zvwkliljx55qvi8ss2q0xja"))))
-   (build-system cmake-build-system)
-   (arguments '(#:configure-flags '()
-                #:build-type "Release"
-                #:tests? #t
-                #:phases (modify-phases %standard-phases
-                           (delete 'set-SOURCE-DATE-EPOCH)
-                           (delete 'install-locale)
-                           (delete 'bootstrap)
-                           (delete 'patch-usr-bin-file)
-                           (delete 'patch-source-shebangs)
-                           (delete 'patch-generated-file-shebangs)
-                           (delete 'patch-shebangs)
-                           (delete 'strip)
-                           (delete 'patch-dot-desktop-files)
-                           (delete 'make-dynamic-linker-cache)
-                           (delete 'reset-gzip-timestamps))))
-   (inputs (list pkg-config
-                 git
+   (build-system trivial-build-system)
+   (arguments `(#:modules ((guix build utils))
+                #:builder
+                (begin
+                  (use-modules (guix build utils)
+                               (ice-9 match))
+                  (let* ((srcdir (assoc-ref %build-inputs "source"))
+                         (outdir (assoc-ref %outputs "out"))
+                         (tmpdir (getenv "TMPDIR"))
+                         (build-srcdir (string-append tmpdir "/source"))
+                         (build-dir (string-append build-srcdir "/build"))
+                         (bin-outdir (string-append outdir "/bin")))
+                    (copy-recursively srcdir build-srcdir)
+                    (chdir build-dir)
+                    (set-path-environment-variable
+                      "PATH"
+                      '("bin")
+                      (map (match-lambda ((_ . input) input)) %build-inputs))
+                    (invoke "cmake"
+                            ".."
+                            "-DCMAKE_BUILD_TYPE=Release"
+                            (string-append "-DCMAKE_INSTALL_PREFIX=" outdir)
+                            "-DCMAKE_INSTALL_LIBDIR=lib"
+                            "-DCMAKE_INSTALL_RPATH_USE_LINK_PATH=TRUE"
+                            (string-append "-DCMAKE_INSTALL_RPATH=" outdir "/lib")
+                            "-DCMAKE_VERBOSE_MAKEFILE=ON"
+                            "-DBUILD_PRO=On")
+                    (invoke "make" "-j8")
+                    (install-file (string-append build-dir "/bin/tic80") bin-outdir)
+                    #t))))
+   (inputs (list cmake
                  ruby
                  glu
                  mesa
