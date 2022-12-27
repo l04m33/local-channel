@@ -47,9 +47,7 @@
                                          (string-append "-DCMAKE_INSTALL_RPATH=" outdir "/lib")
                                          "-DCMAKE_VERBOSE_MAKEFILE=ON"
                                          "-DBUILD_PRO=On")))))))
-   (inputs (list pkg-config
-                 git
-                 ruby
+   (inputs (list ruby
                  glu
                  mesa
                  libglvnd
