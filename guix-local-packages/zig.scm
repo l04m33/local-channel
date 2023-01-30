@@ -66,12 +66,12 @@ of programming tools as well as libraries with equivalent functionality.")
 (define zig
   (package
     (name "zig")
-    (version "0.11.x-20221220-ddb07b607")
+    (version "0.11.x-20230131-659f23dc5")
     (source (origin
               (method git-fetch)
               (uri (git-reference
                      (url "https://github.com/ziglang/zig.git")
-                     (commit "ddb07b607")
+                     (commit "659f23dc5")
                      (recursive? #t)))
               (file-name (git-file-name "zig" version))
               (sha256
@@ -106,12 +106,12 @@ maintaining robust, optimal, and reusable software.")
 (define zls
   (package
     (name "zls")
-    (version "0.11.x-20221220-c355a54")
+    (version "0.11.x-20230131-eac61ba")
     (source (origin
               (method git-fetch)
               (uri (git-reference
                      (url "https://github.com/zigtools/zls.git")
-                     (commit "c355a54")
+                     (commit "eac61ba")
                      (recursive? #t)))
               (sha256
                (base32
