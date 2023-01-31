@@ -10,7 +10,7 @@
 (define-public kotlin-compiler
   (package
     (name "kotlin-compiler")
-    (version "1.7.21")
+    (version "1.8.0")
     (source
      (origin
       (method url-fetch/zipbomb)
@@ -20,13 +20,13 @@
                           version
                           ".zip"))
       (sha256
-       (base32 "17i7mpq2anrh3fwcvcyx6azkk8iz8k4binrnsg0g0mc7h0dv64l4"))))
+       (base32 "0bn48cm4mgg9vz47siidgliz3mpjz21d5jhr79maaclqmjgl3f8b"))))
     (build-system binary-build-system)
     (arguments
      `(#:install-plan `(("./kotlinc" "."))))
     ;; kotlinc-jvm needs the java command to run
     (propagated-inputs
-     `(("openjdk" ,openjdk)))
+     `(("openjdk:jdk" ,openjdk)))
     (home-page "https://kotlinlang.org/")
     (synopsis "Kotlin compiler for the command line")
     (description "Kotlin compiler for the command line")
