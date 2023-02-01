@@ -66,12 +66,12 @@ of programming tools as well as libraries with equivalent functionality.")
 (define zig
   (package
     (name "zig")
-    (version "0.11.x-20230131-659f23dc5")
+    (version "0.11.x-20230201-8d37c6f71")
     (source (origin
               (method git-fetch)
               (uri (git-reference
                      (url "https://github.com/ziglang/zig.git")
-                     (commit "659f23dc5")
+                     (commit "8d37c6f71")
                      (recursive? #t)))
               (file-name (git-file-name "zig" version))
               (sha256
