@@ -115,7 +115,7 @@ maintaining robust, optimal, and reusable software.")
                      (recursive? #t)))
               (sha256
                (base32
-                "1naqjig94ykl1hnpia98agx91hxd3nayyfdkhvg1ggpfpgfx8145"))))
+                "0drslsqi9pw496pmx8bg23clans6lmb4pjsyppxdj09kjhw3bgs6"))))
     (build-system trivial-build-system)
     (arguments `(#:modules ((guix build utils))
                  #:builder
