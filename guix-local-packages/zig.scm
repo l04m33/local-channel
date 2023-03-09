@@ -20,7 +20,7 @@
 (define-public llvm-for-zig
   (package
     (name "llvm-for-zig")
-    (version "15.0.6")
+    (version "15.0.7")
     (source
      (origin
       (method git-fetch)
@@ -66,17 +66,17 @@ of programming tools as well as libraries with equivalent functionality.")
 (define zig
   (package
     (name "zig")
-    (version "0.11.x-20230201-8d37c6f71")
+    (version "0.11.x-20230310-6f13a725a")
     (source (origin
               (method git-fetch)
               (uri (git-reference
                      (url "https://github.com/ziglang/zig.git")
-                     (commit "8d37c6f71")
+                     (commit (substring version (string-length "0.11.x-yyyymmdd-")))
                      (recursive? #t)))
               (file-name (git-file-name "zig" version))
               (sha256
                (base32
-                "0340jrc578fsx7dyrl7sjkw9k40kyj95s5b7738vwirbif9r79cw"))
+                "1340jrc578fsx7dyrl7sjkw9k40kyj95s5b7738vwirbif9r79cw"))
               (patches
                ;; Zig hard-coded /usr/bin/env in the source, this is to fix that.
                (search-patches "zig_fix_dyn_linker_locator.patch"))))
