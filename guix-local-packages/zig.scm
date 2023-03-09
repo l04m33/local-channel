@@ -76,7 +76,7 @@ of programming tools as well as libraries with equivalent functionality.")
               (file-name (git-file-name "zig" version))
               (sha256
                (base32
-                "1340jrc578fsx7dyrl7sjkw9k40kyj95s5b7738vwirbif9r79cw"))
+                "12sggw15sxq1krh1mfk3c1f07h895jlxbcifpwk3pznh4m1rjfy2"))
               (patches
                ;; Zig hard-coded /usr/bin/env in the source, this is to fix that.
                (search-patches "zig_fix_dyn_linker_locator.patch"))))
