@@ -28,7 +28,7 @@
             (url "https://github.com/llvm/llvm-project")
             (commit (string-append "llvmorg-" version))))
       (file-name (git-file-name "llvm-project" version))
-      (sha256 (base32 "13vj0q6if5095a3awq8d97l17qdsc7fks6avkai9k80kl0kzxpv6"))))
+      (sha256 (base32 "12sggw15sxq1krh1mfk3c1f07h895jlxbcifpwk3pznh4m1rjfy2"))))
     (build-system cmake-build-system)
     (arguments
      (list
