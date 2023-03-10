@@ -1,5 +1,5 @@
 diff --git a/lib/std/zig/system/NativeTargetInfo.zig b/lib/std/zig/system/NativeTargetInfo.zig
-index 023279738..cc5855860 100644
+index dbbebb43c..4fffd32d5 100644
 --- a/lib/std/zig/system/NativeTargetInfo.zig
 +++ b/lib/std/zig/system/NativeTargetInfo.zig
 @@ -232,6 +232,34 @@ pub fn detect(cross_target: CrossTarget) DetectError!NativeTargetInfo {
@@ -12,7 +12,7 @@ index 023279738..cc5855860 100644
 +
 +    if (path) |p| {
 +        var st: usize = 0;
-+        for (p) |c, ed| {
++        for (p, 0..) |c, ed| {
 +            if (c == ':') {
 +                const dir = p[st..ed];
 +                st = ed + 1;
