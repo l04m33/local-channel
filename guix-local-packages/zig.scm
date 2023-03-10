@@ -113,6 +113,7 @@ maintaining robust, optimal, and reusable software.")
                      (url "https://github.com/zigtools/zls.git")
                      (commit (substring version (string-length "0.11.x-yyyymmdd-")))
                      (recursive? #t)))
+              (file-name (git-file-name "zls" version))
               (sha256
                (base32
                 "118rsc09n0p8l07z6zlc7pz7g9a36g8issb2wws2fd0ar007sqc1"))))
