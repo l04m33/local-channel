@@ -66,7 +66,7 @@ of programming tools as well as libraries with equivalent functionality.")
 (define zig
   (package
     (name "zig")
-    (version "0.11.x-20230310-6f13a725a")
+    (version "0.11.x-20230310-b445bbfea")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -76,7 +76,7 @@ of programming tools as well as libraries with equivalent functionality.")
               (file-name (git-file-name "zig" version))
               (sha256
                (base32
-                "0yqmgdjj931i0gda9iw2d1iqslnqym941rcxpjvvrl2yfsr7l2p2"))
+                "1yqmgdjj931i0gda9iw2d1iqslnqym941rcxpjvvrl2yfsr7l2p2"))
               (patches
                ;; Zig hard-coded /usr/bin/env in the source, this is to fix that.
                (search-patches "zig_fix_dyn_linker_locator.patch"))))
