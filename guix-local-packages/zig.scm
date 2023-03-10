@@ -141,7 +141,8 @@ maintaining robust, optimal, and reusable software.")
                        (map (match-lambda ((_ . input) input)) %build-inputs))
                      (invoke "zig"
                              "build"
-                             "-Drelease-safe")
+                             "-Doptimize=ReleaseSafe"
+                             "-Ddata_version=master")
                      (install-file (string-append build-srcdir "/zig-out/bin/zls") bin-outdir)
                      #t))))
     ;; The `zig build` command needs at least the `env` command
