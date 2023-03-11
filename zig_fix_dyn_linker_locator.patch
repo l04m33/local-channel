@@ -1,14 +1,32 @@
 diff --git a/lib/std/zig/system/NativeTargetInfo.zig b/lib/std/zig/system/NativeTargetInfo.zig
-index dbbebb43c..4fffd32d5 100644
+index dbbebb43c..abefe5b26 100644
 --- a/lib/std/zig/system/NativeTargetInfo.zig
 +++ b/lib/std/zig/system/NativeTargetInfo.zig
-@@ -232,6 +232,34 @@ pub fn detect(cross_target: CrossTarget) DetectError!NativeTargetInfo {
+@@ -232,6 +232,47 @@ pub fn detect(cross_target: CrossTarget) DetectError!NativeTargetInfo {
      return result;
  }
  
++fn extractRefBinaryCandidate(name: []const u8, dir: []const u8) anyerror![]u8 {
++    // static buffer
++    const S = struct {
++        var buff: [4096]u8 = undefined;
++    };
++
++    std.mem.copy(u8, S.buff[0..], dir);
++    S.buff[dir.len] = '/';
++    std.mem.copy(u8, S.buff[(dir.len+1)..], name);
++    const candidate = S.buff[0..(dir.len+name.len+1)];
++
++    // Do we have read access?
++    const file = std.fs.openFileAbsolute(candidate, .{}) catch |err| {
++        return err;
++    };
++    file.close();
++    return candidate;
++}
++
 +fn findRefBinaryPath(name: []const u8) ?[]u8 {
 +    const path = std.os.getenv("PATH");
-+    var buff: [4096]u8 = undefined;
 +
 +    if (path) |p| {
 +        var st: usize = 0;
@@ -17,18 +35,13 @@ index dbbebb43c..4fffd32d5 100644
 +                const dir = p[st..ed];
 +                st = ed + 1;
 +
-+                std.mem.copy(u8, buff[0..], dir);
-+                buff[dir.len] = '/';
-+                std.mem.copy(u8, buff[(dir.len+1)..], name);
-+                const candidate = buff[0..(dir.len+name.len+1)];
-+
-+                const file = std.fs.openFileAbsolute(candidate, .{}) catch {
++                const candidate = extractRefBinaryCandidate(name, dir) catch {
 +                    continue;
 +                };
-+                file.close();
 +                return candidate;
 +            }
 +        }
++        return extractRefBinaryCandidate(name, p) catch null;
 +    }
 +
 +    return null;
@@ -37,7 +50,7 @@ index dbbebb43c..4fffd32d5 100644
  /// In the past, this function attempted to use the executable's own binary if it was dynamically
  /// linked to answer both the C ABI question and the dynamic linker question. However, this
  /// could be problematic on a system that uses a RUNPATH for the compiler binary, locking
-@@ -311,7 +339,7 @@ fn detectAbiAndDynamicLinker(
+@@ -311,7 +352,7 @@ fn detectAbiAndDynamicLinker(
  
          // Since /usr/bin/env is hard-coded into the shebang line of many portable scripts, it's a
          // reasonably reliable path to start with.
