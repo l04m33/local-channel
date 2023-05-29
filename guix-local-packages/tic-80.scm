@@ -49,7 +49,7 @@
                                          "-DBUILD_PRO=On")))))))
    (inputs (list pkg-config
                  ruby
-                 python
+                 python-wrapper
                  glu
                  mesa
                  libglvnd
