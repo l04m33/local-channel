@@ -10,6 +10,7 @@
   #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages version-control)
   #:use-module (gnu packages ruby)
+  #:use-module (gnu packages python)
   #:use-module (gnu packages gl)
   #:export (tic-80))  
 
