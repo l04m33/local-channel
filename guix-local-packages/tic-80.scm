@@ -12,7 +12,8 @@
   #:use-module (gnu packages ruby)
   #:use-module (gnu packages python)
   #:use-module (gnu packages gl)
-  #:export (tic-80))  
+  #:use-module (gnu packages xorg)
+  #:export (tic-80))
 
 
 (define tic-80
@@ -53,6 +54,7 @@
                  python-wrapper
                  glu
                  mesa
+                 libxcursor
                  libglvnd
                  freeglut
                  alsa-lib))
