@@ -58,9 +58,7 @@
                  libxcursor
                  libglvnd
                  freeglut
-                 pulseaudio
-                 ;alsa-lib
-                 ))
+                 pulseaudio))
    (synopsis "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
    (description "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
    (home-page "https://tic80.com/")
