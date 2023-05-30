@@ -13,6 +13,7 @@
   #:use-module (gnu packages python)
   #:use-module (gnu packages gl)
   #:use-module (gnu packages xorg)
+  #:use-module (gnu packages pulseaudio)
   #:export (tic-80))
 
 
@@ -57,7 +58,9 @@
                  libxcursor
                  libglvnd
                  freeglut
-                 alsa-lib))
+                 pulseaudio
+                 ;alsa-lib
+                 ))
    (synopsis "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
    (description "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
    (home-page "https://tic80.com/")
