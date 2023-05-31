@@ -36,6 +36,7 @@
                #:build-type "Release"
                #:configure-flags
                #~(list
+                  "-DCC=gcc"    ;; for building janet
                   "-DBUILD_WITH_JANET=TRUE"
                   "-DBUILD_PRO=ON")))
    ;; (arguments `(#:tests? #f
