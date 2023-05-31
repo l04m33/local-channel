@@ -38,9 +38,10 @@
                #~(list
                   "-DBUILD_WITH_JANET=TRUE"
                   "-DBUILD_PRO=ON")
-               #:make-flags
-               #~(list
-                  (string-append "CC=" #$(cc-for-target)))))
+               #:phases
+               #~(modify-phases
+                  %standard-phases
+                  (add-before 'configure 'set-cc-for-janet (lambda _ (setenv "CC" "gcc"))))))
    ;; (arguments `(#:tests? #f
    ;;              #:phases (modify-phases %standard-phases
    ;;                         (replace 'configure
