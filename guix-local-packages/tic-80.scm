@@ -36,9 +36,11 @@
                #:build-type "Release"
                #:configure-flags
                #~(list
-                  "-DCC=gcc"    ;; for building janet
                   "-DBUILD_WITH_JANET=TRUE"
-                  "-DBUILD_PRO=ON")))
+                  "-DBUILD_PRO=ON")
+               #:make-flags
+               #~(list
+                  (string-append "CC=" #$(cc-for-target)))))
    ;; (arguments `(#:tests? #f
    ;;              #:phases (modify-phases %standard-phases
    ;;                         (replace 'configure
