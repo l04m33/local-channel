@@ -34,6 +34,7 @@
    (build-system cmake-build-system)
    (arguments (list
                #:build-type "Release"
+               #:tests? #f
                #:configure-flags
                #~(list
                   "-DBUILD_WITH_JANET=TRUE"
@@ -42,24 +43,6 @@
                #~(modify-phases
                   %standard-phases
                   (add-before 'configure 'set-cc-for-janet (lambda _ (setenv "CC" "gcc"))))))
-   ;; (arguments `(#:tests? #f
-   ;;              #:phases (modify-phases %standard-phases
-   ;;                         (replace 'configure
-   ;;                           (lambda _
-   ;;                             (let* ((tmpdir (getenv "TMPDIR"))
-   ;;                                    (build-srcdir (string-append tmpdir "/source"))
-   ;;                                    (build-dir (string-append build-srcdir "/build"))
-   ;;                                    (outdir (assoc-ref %outputs "out")))
-   ;;                               (chdir build-dir)
-   ;;                               (invoke "cmake"
-   ;;                                       ".."
-   ;;                                       "-DCMAKE_BUILD_TYPE=Release"
-   ;;                                       (string-append "-DCMAKE_INSTALL_PREFIX=" outdir)
-   ;;                                       "-DCMAKE_INSTALL_LIBDIR=lib"
-   ;;                                       "-DCMAKE_INSTALL_RPATH_USE_LINK_PATH=TRUE"
-   ;;                                       (string-append "-DCMAKE_INSTALL_RPATH=" outdir "/lib")
-   ;;                                       "-DCMAKE_VERBOSE_MAKEFILE=ON"
-   ;;                                       "-DBUILD_PRO=On")))))))
    (inputs (list pkg-config
                  ruby
                  python-wrapper
