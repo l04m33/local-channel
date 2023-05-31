@@ -32,10 +32,12 @@
              (base32
               "0gcsai47cvk8cxrfcklbyg8qgxnzbpcc8hi60sgv3kpjr1xz0jrg"))))
    (build-system cmake-build-system)
-   (arguments `(#:build-type "Release"
-                #:configure-flags
-                ("-DBUILD_WITH_JANET=TRUE"
-                 "-DBUILD_PRO=ON")))
+   (arguments (list
+               #:build-type "Release"
+               #:configure-flags
+               #~(list
+                  "-DBUILD_WITH_JANET=TRUE"
+                  "-DBUILD_PRO=ON")))
    ;; (arguments `(#:tests? #f
    ;;              #:phases (modify-phases %standard-phases
    ;;                         (replace 'configure
