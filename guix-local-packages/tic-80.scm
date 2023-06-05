@@ -45,13 +45,15 @@
                   %standard-phases
                   (add-before 'configure 'set-cc-for-janet (lambda _ (setenv "CC" "gcc"))))))
    (propagated-inputs (list libx11
+                            libxext
+                            libxcursor
+                            mesa
+                            alsa-lib
                             pulseaudio))
    (inputs (list pkg-config
                  ruby
                  python-wrapper
                  glu
-                 mesa
-                 libxcursor
                  libglvnd
                  freeglut))
    (synopsis "TIC-80 is a fantasy computer for making, playing and sharing tiny games.")
