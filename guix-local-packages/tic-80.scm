@@ -15,6 +15,7 @@
   #:use-module (gnu packages xorg)
   #:use-module (gnu packages pulseaudio)
   #:use-module (gnu packages sdl)
+  #:use-module (gnu packages tls)
   #:export (tic-80))
 
 
