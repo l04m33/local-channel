@@ -21,17 +21,17 @@
 (define tic-80
   (package
    (name "tic-80")
-   (version "v1.1.0-dev-20230601")
+   (version "v1.1.0-dev-20230606")
    (source (origin
             (method git-fetch)
             (uri (git-reference
                   (url "https://github.com/nesbox/TIC-80.git")
-                  (commit "5dd72cf0")
+                  (commit "f5f3c15e")
                   (recursive? #t)))
             (file-name (git-file-name "tic-80" version))
             (sha256
              (base32
-              "0gcsai47cvk8cxrfcklbyg8qgxnzbpcc8hi60sgv3kpjr1xz0jrg"))))
+              "1gcsai47cvk8cxrfcklbyg8qgxnzbpcc8hi60sgv3kpjr1xz0jrg"))))
    (build-system cmake-build-system)
    (arguments (list
                #:build-type "Release"
@@ -51,6 +51,7 @@
                             alsa-lib
                             pulseaudio))
    (inputs (list pkg-config
+                 openssl
                  ruby
                  python-wrapper
                  glu
