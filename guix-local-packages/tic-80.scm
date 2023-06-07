@@ -41,20 +41,23 @@
                #~(list
                   ;; SDL calls dlopen to locate backends at runtime.
                   ;; Make sure it can find them.
-                  (let rpath-loop ((prop-inputs (package-propagated-inputs #$this-package))
-                                   (res (string-append "-DCMAKE_INSTALL_RPATH=" #$output "/lib")))
-                    (if (nil? prop-inputs)
-                        res
-                        (let* ((head (car prop-inputs))
-                               (tail (cdr prop-inputs))
-                               (input-path (cdr head)))
-                          (rpath-loop tail (string-append res ";" input-path "/lib")))))
+                  (string-append
+                   "-DCMAKE_INSTALL_RPATH="
+                   #$output "/lib;"
+                   #$libx11 "/lib;"
+                   #$libxext "/lib;"
+                   #$libxcursor "/lib;"
+                   #$mesa "/lib;"
+                   #$alsa-lib "/lib;"
+                   #$pulseaudio "/lib")
                   "-DBUILD_WITH_JANET=TRUE"
                   "-DBUILD_PRO=ON")
                #:phases
                #~(modify-phases
                   %standard-phases
                   (add-before 'configure 'set-cc-for-janet (lambda _ (setenv "CC" "gcc"))))))
+   ;; All things in RUNPATH should be in propagated-inputs too,
+   ;; or `guix gc` would purge them.
    (propagated-inputs (list libx11
                             libxext
                             libxcursor
