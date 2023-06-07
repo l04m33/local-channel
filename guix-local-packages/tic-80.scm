@@ -39,6 +39,15 @@
                #:tests? #f
                #:configure-flags
                #~(list
+                  (string-append
+                   "-DCMAKE_INSTALL_RPATH="
+                   (string-append #$output "/lib") ";"
+                   (string-append #$libx11 "/lib") ";"
+                   (string-append #$libxext "/lib") ";"
+                   (string-append #$libxcursor "/lib") ";"
+                   (string-append #$mesa "/lib") ";"
+                   (string-append #$alsa-lib "/lib") ";"
+                   (string-append #$pulseaudio "/lib"))
                   "-DBUILD_WITH_JANET=TRUE"
                   "-DBUILD_PRO=ON")
                #:phases
