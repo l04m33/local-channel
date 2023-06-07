@@ -43,12 +43,12 @@
                   ;; Make sure it can find them.
                   (let rpath-loop ((prop-inputs %build-inputs)
                                    (res (string-append "-DCMAKE_INSTALL_RPATH=" #$output "/lib")))
-                    (if prop-inputs
+                    (if (nil? prop-inputs)
+                        res
                         (let* ((head (car prop-inputs))
                                (tail (cdr prop-inputs))
                                (input-path (cdr head)))
-                          (rpath-loop tail (string-append res ";" input-path "/lib")))
-                        res))
+                          (rpath-loop tail (string-append res ";" input-path "/lib")))))
                   "-DBUILD_WITH_JANET=TRUE"
                   "-DBUILD_PRO=ON")
                #:phases
