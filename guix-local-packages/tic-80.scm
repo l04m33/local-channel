@@ -41,7 +41,7 @@
                #~(list
                   ;; SDL calls dlopen to locate backends at runtime.
                   ;; Make sure it can find them.
-                  (let rpath-loop ((prop-inputs #$propagated-inputs)
+                  (let rpath-loop ((prop-inputs %build-inputs)
                                    (res (string-append "-DCMAKE_INSTALL_RPATH=" #$output "/lib")))
                     (if prop-inputs
                         (let* ((head (car prop-inputs))
