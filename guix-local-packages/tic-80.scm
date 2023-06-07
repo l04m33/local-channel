@@ -39,15 +39,17 @@
                #:tests? #f
                #:configure-flags
                #~(list
-                  (string-append
-                   "-DCMAKE_INSTALL_RPATH="
-                   (string-append #$output "/lib") ";"
-                   (string-append #$libx11 "/lib") ";"
-                   (string-append #$libxext "/lib") ";"
-                   (string-append #$libxcursor "/lib") ";"
-                   (string-append #$mesa "/lib") ";"
-                   (string-append #$alsa-lib "/lib") ";"
-                   (string-append #$pulseaudio "/lib"))
+                  ;; SDL calls dlopen to locate backends at runtime.
+                  ;; Make sure it can find them.
+                  (let rpath-loop ((prop-inputs #$propagated-inputs)
+                                   (res (string-append "-DCMAKE_INSTALL_RPATH="
+                                                       #$(file-append output "/lib"))))
+                    (if prop-inputs
+                        (let* ((head (car prop-inputs))
+                               (tail (cdr prop-inputs))
+                               (input-path (cdr head)))
+                          (rpath-loop tail (string-append res ";" input-path "/lib")))
+                        res))
                   "-DBUILD_WITH_JANET=TRUE"
                   "-DBUILD_PRO=ON")
                #:phases
