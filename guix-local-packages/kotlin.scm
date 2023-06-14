@@ -10,7 +10,7 @@
 (define-public kotlin-compiler
   (package
     (name "kotlin-compiler")
-    (version "1.8.0")
+    (version "1.8.22")
     (source
      (origin
       (method url-fetch/zipbomb)
@@ -20,7 +20,7 @@
                           version
                           ".zip"))
       (sha256
-       (base32 "0bn48cm4mgg9vz47siidgliz3mpjz21d5jhr79maaclqmjgl3f8b"))))
+       (base32 "19psrm905r7fli27cn5hykvjhizshpg2xzp1kbkv3pwybki0zxci"))))
     (build-system binary-build-system)
     (arguments
      `(#:install-plan `(("./kotlinc" "."))))
