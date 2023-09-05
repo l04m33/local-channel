@@ -32,7 +32,7 @@
             (file-name (git-file-name "tic-80" version))
             (sha256
              (base32
-              "ylz3kcphnsu7kykpc5zjdeuenhd6jw3k2hxuidarkwobalbcbpdq"))))
+              "1iqb48n1172m24649vyidbdy9iv9hj992whp9xhzbabcww4vbwy2"))))
    (build-system cmake-build-system)
    (arguments (list
                #:build-type "Release"
