@@ -64,6 +64,7 @@
                             alsa-lib
                             pulseaudio))
    (inputs (list pkg-config
+                 curl
                  ruby
                  python-wrapper
                  glu
