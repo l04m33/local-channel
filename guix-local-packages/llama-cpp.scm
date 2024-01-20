@@ -29,6 +29,8 @@
      (build-system cmake-build-system)
      (arguments
       (list
+       #:build-type "Release"
+       #:tests? #f
        #:configure-flags
        #~(list)))
      (inputs (list
@@ -59,6 +61,8 @@
      (build-system cmake-build-system)
      (arguments
       (list
+       #:build-type "Release"
+       #:tests? #f
        #:configure-flags
        #~(list
           "-DLLAMA_CLBLAST=ON"
