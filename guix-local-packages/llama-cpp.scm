@@ -68,10 +68,11 @@
           "-DLLAMA_CLBLAST=ON"
           (string-append "-DCLBlast_DIR=" #$clblast))))
      (inputs (list
-              opencl-icd-loader
               opencl-headers
               clblast
               pkg-config))
+     (propagated-inputs (list
+                         opencl-icd-loader))
      (home-page "https://github.com/ggerganov/llama.cpp")
      (synopsis "Port of Facebook's LLaMA model in C/C++")
      (description "This package provides a port to Facebook's LLaMA collection
