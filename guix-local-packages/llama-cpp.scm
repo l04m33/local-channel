@@ -8,6 +8,7 @@
   #:use-module (gnu packages)
   #:use-module (gnu packages opencl)
   #:use-module (gnu packages pkg-config)
+  #:use-module (gnu packages version-control)
   #:export (llama-cpp))
 
 
@@ -36,7 +37,8 @@
      (inputs (list
               opencl-icd-loader
               opencl-headers
-              pkg-config))
+              pkg-config
+              git))
      (home-page "https://github.com/CNugteren/CLBlast")
      (synopsis "The tuned OpenCL BLAS library")
      (description "CLBlast is a lightweight, performant and tunable OpenCL BLAS library written in C++11.")
@@ -69,10 +71,11 @@
           (string-append "-DCLBlast_DIR=" #$clblast))))
      (inputs (list
               opencl-headers
-              clblast
-              pkg-config))
+              pkg-config
+              git))
      (propagated-inputs (list
-                         opencl-icd-loader))
+                         opencl-icd-loader
+                         clblast))
      (home-page "https://github.com/ggerganov/llama.cpp")
      (synopsis "Port of Facebook's LLaMA model in C/C++")
      (description "This package provides a port to Facebook's LLaMA collection
