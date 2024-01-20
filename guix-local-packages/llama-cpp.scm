@@ -7,6 +7,7 @@
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (gnu packages)
   #:use-module (gnu packages opencl)
+  #:use-module (gnu packages rocm)
   #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages version-control)
   #:export (llama-cpp))
@@ -75,7 +76,8 @@
               git))
      (propagated-inputs (list
                          opencl-icd-loader
-                         clblast))
+                         clblast
+                         rocm-opencl-runtime))
      (home-page "https://github.com/ggerganov/llama.cpp")
      (synopsis "Port of Facebook's LLaMA model in C/C++")
      (description "This package provides a port to Facebook's LLaMA collection
