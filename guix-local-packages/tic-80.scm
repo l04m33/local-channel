@@ -23,7 +23,7 @@
 (define tic-80
   (package
    (name "tic-80")
-   (version "v1.1.2736")
+   (version "v1.1.2837")
    (source (origin
             (method git-fetch)
             (uri (git-reference
